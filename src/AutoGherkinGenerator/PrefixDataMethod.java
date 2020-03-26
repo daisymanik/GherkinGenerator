@@ -110,7 +110,7 @@ public class PrefixDataMethod {
 			ArrayList<String> set2List = new ArrayList<String>(); 
 			set2List.addAll(set2);
 			
-			String filename="C:\\Users\\parkavir\\eclipse-workspace\\section3\\src\\AutoGherkinGenerator\\removeDuplicates.xlsx";
+			String filename="C:\\Users\\prakashp\\Downloads\\GherkinGenerator\\src\\AutoGherkinGenerator\\TotalSteps.xlsx";
 			int IterCnt =0;		
 			
 			 XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(new File(filename))); 

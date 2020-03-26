@@ -25,8 +25,8 @@ public class RemoveDuplicateSteps {
 
 	public static void removeDuplicates() throws FileNotFoundException, IOException {
 			Set<String> set=new LinkedHashSet<String>();
-			String srcfile="C:\\Users\\parkavir\\eclipse-workspace\\section3\\src\\AutoGherkinGenerator\\removeDuplicates.xlsx";
-			String descfile="C:\\Users\\parkavir\\eclipse-workspace\\section3\\src\\AutoGherkinGenerator\\uniqueSteps.xlsx";
+			String srcfile="C:\\Users\\prakashp\\Downloads\\GherkinGenerator\\src\\AutoGherkinGenerator\\TotalSteps.xlsx";
+			String descfile="C:\\Users\\prakashp\\Downloads\\GherkinGenerator\\src\\AutoGherkinGenerator\\uniqueSteps.xlsx";
 			
 			XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(new File(srcfile))); 
 		    XSSFSheet sheet = workbook.getSheetAt(0); 
@@ -53,7 +53,7 @@ public class RemoveDuplicateSteps {
 	}
 	
 	public static void assignKeyword() throws IOException {
-    String file="C:\\Users\\parkavir\\eclipse-workspace\\section3\\src\\removeDuplicates\\uniqueSteps.xlsx";
+    String file="C:\\Users\\prakashp\\Downloads\\GherkinGenerator\\src\\AutoGherkinGenerator\\uniqueSteps.xlsx";
 		
 		Workbook workbook = new XSSFWorkbook(new FileInputStream(new File(file))); 
 	    Sheet sheet = workbook.getSheetAt(0); 		   
