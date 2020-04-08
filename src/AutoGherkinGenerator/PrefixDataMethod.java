@@ -27,7 +27,7 @@ public class PrefixDataMethod {
 	public static int rownum=0;
 	
 	 public static String Records(Recordset recordset_1)throws FilloException, IOException {
-			String step="",step2="";		
+			String step="";		
 			LinkedHashMap<String, String> map1 = new LinkedHashMap<String, String>();//headers and value		
 			LinkedHashSet<String> set1 = new LinkedHashSet<String>();// Given, When , Then conversions		
 		   
@@ -42,6 +42,8 @@ public class PrefixDataMethod {
 						map1.remove(header, value);
 					}
 				}
+				
+				System.out.println(map1);
 				//Map1 Key Set
 				Set<String> map1KeySet = map1.keySet();			
 				Iterator<String> iter = map1KeySet.iterator();		
@@ -49,95 +51,99 @@ public class PrefixDataMethod {
 			  boolean pre=true,action=true,validate=true;
 				while (iter.hasNext()) {
 					String setvalue = iter.next().toString();
-					if (setvalue.startsWith("Pre")) {
+					if (setvalue.startsWith("Pre_")) {
 						if(pre) {
-							setvalue = setvalue.replace("Pre:", "Given "); pre=false;
+							setvalue = setvalue.replace("Pre_", "Given "); pre=false;
 						}else {
-							setvalue=setvalue.replace("Pre:", "And ");
+							setvalue=setvalue.replace("Pre_", "And ");
 						}
 						set1.add(setvalue);
-						} else if (setvalue.startsWith("Action:")) {
+						} else if (setvalue.startsWith("Action_")) {
 						if(action) {
-							setvalue = setvalue.replace("Action:", "When ");action=false;
+							setvalue = setvalue.replace("Action_", "When ");action=false;
 						}else {
-							setvalue=setvalue.replace("Action:", "And ");
+							setvalue=setvalue.replace("Action_", "And ");
 						}															
 						set1.add(setvalue);					
-					} else if (setvalue.startsWith("Validation:")) {	
+					} else if (setvalue.startsWith("Validation_")) {	
 						if(validate) {
-							setvalue = setvalue.replace("Validation:", "Then ");validate=false;
+							setvalue = setvalue.replace("Validation_", "Then ");validate=false;
 						}else {
-							setvalue=setvalue.replace("Validation:", "And ");
+							setvalue=setvalue.replace("Validation_", "And ");
 						}					
 					    set1.add(setvalue);
 					}				
 				}		
+		    System.out.println(set1);
 		    
 			Iterator<String> iter_1 = map1KeySet.iterator();
 			Set<String> set2 = new LinkedHashSet<String>();		
 			while (iter_1.hasNext()) {
 				String setvalue2 = iter_1.next().toString();
-				if (setvalue2.startsWith("Pre")) {				
-						setvalue2 = setvalue2.replace("Pre:", "Given ");
+				if (setvalue2.startsWith("Pre_")) {				
+						setvalue2 = setvalue2.replace("Pre_", "Given ");
 				       set2.add(setvalue2);
-				} else if (setvalue2.startsWith("Action:")) {
-						setvalue2 = setvalue2.replace("Action:", "When ");											
+				} else if (setvalue2.startsWith("Action_")) {
+						setvalue2 = setvalue2.replace("Action_", "When ");											
 						set2.add(setvalue2);					
-				} else if (setvalue2.startsWith("Validation:")) {
-					setvalue2 = setvalue2.replace("Validation:", "Then ");
+				} else if (setvalue2.startsWith("Validation_")) {
+					setvalue2 = setvalue2.replace("Validation_", "Then ");
 					set2.add(setvalue2);
 				}				
 			}	
+			System.out.println(set2);
 			
 			int set1size=set1.size();
-			int set2size=set2.size();		
+			int set2size=set2.size();	
+			
+			System.out.println("s1= "+set1size+" s2= "+set2size);
 			
 			Set<String> map1Key = map1.keySet();
 			map1Key.remove("TestConditionID");
+			map1Key.remove("Secnario_Tag");
+			map1Key.remove("Feature_tag");
+			map1Key.remove("Secnario_Data");
+			map1Key.remove("Feature_Data");
+			map1Key.remove("Feature_Name");
+			map1Key.remove("Scenario_Name");
+			map1Key.remove("ExpectedScenario");
+			map1Key.remove("Update_Feature");
+			
+			System.out.println(map1Key);
 			
 			int Map1KeySize = map1Key.size();
-			int set1Size = set1.size();
-			
-			ArrayList<String> Map1KeyList = new ArrayList<String>(); 
-			Map1KeyList.addAll(map1Key);
+//			int set1Size = set1.size();			
+			System.out.println(Map1KeySize);
 			
 			ArrayList<String> set1List = new ArrayList<String>(); 
 			set1List.addAll(set1);
+			System.out.println(set1List);
 			
 			ArrayList<String> Map1KeySet = new ArrayList<String>(); 
 			Map1KeySet.addAll(map1Key);
+			System.out.println(Map1KeySet);
 			
 			ArrayList<String> set2List = new ArrayList<String>(); 
 			set2List.addAll(set2);
+			System.out.println(set2List);
 			
-			String filename="C:\\Users\\prakashp\\Downloads\\GherkinGenerator\\src\\AutoGherkinGenerator\\TotalSteps.xlsx";
 			int IterCnt =0;		
-			
-			 XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(new File(filename))); 
-			 XSSFSheet sheet = workbook.getSheetAt(0); 
-			 FileOutputStream fileOut = new FileOutputStream(filename); 
 				 				 
-			if ((Map1KeySize==set1Size) &&(set1size==set2size)){				
+			if ((Map1KeySize==set1size) &&(set1size==set2size)){				
 				while (Map1KeySize>0) {	
-					Row row = sheet.createRow(rownum++);
-				    Cell cell = row.createCell(cellnum);
 					if (set2List.get(IterCnt).startsWith("Then")) {
 						step+=set1List.get(IterCnt)+ " should be " + map1.get(Map1KeySet.get(IterCnt))+"\n";
-						step2=set1List.get(IterCnt)+ " should be " + map1.get(Map1KeySet.get(IterCnt))+"\n";	
-						cell.setCellValue(step2);						
+						System.out.println(step);
 					}else {
 						step+=(set1List.get(IterCnt)+ " is " + map1.get(Map1KeySet.get(IterCnt)))+"\n";
-						step2=(set1List.get(IterCnt)+ " is " + map1.get(Map1KeySet.get(IterCnt)))+"\n";	
-						cell.setCellValue(step2);							
+						System.out.println(step);
 					}						  
 					  IterCnt++;
 					  Map1KeySize--;
 				}					
-					}	
-			workbook.write(fileOut);
-			fileOut.close();			
+					}		
 			}					
-				return step;	
+				return step;		
 	}
 }
 
