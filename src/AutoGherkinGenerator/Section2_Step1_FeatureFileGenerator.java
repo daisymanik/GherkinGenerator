@@ -13,7 +13,7 @@ import com.codoid.products.fillo.Connection;
 import com.codoid.products.fillo.Fillo;
 import com.codoid.products.fillo.Recordset;
 
-public class Section2_FeatureFileGenerator {
+public class Section2_Step1_FeatureFileGenerator {
 	
 	public static void main(String[] args) throws FilloException, IOException {
 		Fillo fillo = new Fillo();
@@ -22,7 +22,7 @@ public class Section2_FeatureFileGenerator {
 		String strQuery = "Select * from Shares";
 		Recordset recordset = connection.executeQuery(strQuery);	
 		int countofrecords=recordset.getCount();		
-		for (int MainIter = 1; MainIter<=4 ; MainIter++) {	
+		for (int MainIter = 1; MainIter<=10 ; MainIter++) {	
 			
 		String strQuery1 = "Select * from Shares where TestConditionID='TC_0" + MainIter +"'" ;
 		recordset = connection.executeQuery(strQuery1);	
@@ -54,13 +54,12 @@ public class Section2_FeatureFileGenerator {
 				
 			String Query =
 			"Update Shares Set ExpectedScenario='"+stepValue+"',Scenario_Name='TC0"+MainIter+"_scenario"+MainIter+"' where TestConditionID='TC_0"+MainIter+"'";
-//			connection.executeUpdate(Query);		
+			connection.executeUpdate(Query);		
 			writer.close();
-			System.out.println("Generating feature file");
 			 	} 
 		connection.close();
-		
-	}
+		System.out.println("*****Feature Files are Generated*****");
+			}
 }
 
 

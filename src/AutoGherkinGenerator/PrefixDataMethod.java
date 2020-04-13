@@ -27,7 +27,7 @@ public class PrefixDataMethod {
 	public static int rownum=0;
 	
 	 public static String Records(Recordset recordset_1)throws FilloException, IOException {
-			String step="";		
+			String step="",step2="";		
 			LinkedHashMap<String, String> map1 = new LinkedHashMap<String, String>();//headers and value		
 			LinkedHashSet<String> set1 = new LinkedHashSet<String>();// Given, When , Then conversions		
 		   
@@ -42,8 +42,6 @@ public class PrefixDataMethod {
 						map1.remove(header, value);
 					}
 				}
-				
-				System.out.println(map1);
 				//Map1 Key Set
 				Set<String> map1KeySet = map1.keySet();			
 				Iterator<String> iter = map1KeySet.iterator();		
@@ -74,7 +72,6 @@ public class PrefixDataMethod {
 					    set1.add(setvalue);
 					}				
 				}		
-		    System.out.println(set1);
 		    
 			Iterator<String> iter_1 = map1KeySet.iterator();
 			Set<String> set2 = new LinkedHashSet<String>();		
@@ -91,12 +88,9 @@ public class PrefixDataMethod {
 					set2.add(setvalue2);
 				}				
 			}	
-			System.out.println(set2);
 			
 			int set1size=set1.size();
-			int set2size=set2.size();	
-			
-			System.out.println("s1= "+set1size+" s2= "+set2size);
+			int set2size=set2.size();		
 			
 			Set<String> map1Key = map1.keySet();
 			map1Key.remove("TestConditionID");
@@ -109,39 +103,51 @@ public class PrefixDataMethod {
 			map1Key.remove("ExpectedScenario");
 			map1Key.remove("Update_Feature");
 			
-			System.out.println(map1Key);
-			
 			int Map1KeySize = map1Key.size();
-//			int set1Size = set1.size();			
-			System.out.println(Map1KeySize);
+			int set1Size = set1.size();
+			
+			ArrayList<String> Map1KeyList = new ArrayList<String>(); 
+			Map1KeyList.addAll(map1Key);
 			
 			ArrayList<String> set1List = new ArrayList<String>(); 
 			set1List.addAll(set1);
-			System.out.println(set1List);
 			
 			ArrayList<String> Map1KeySet = new ArrayList<String>(); 
 			Map1KeySet.addAll(map1Key);
-			System.out.println(Map1KeySet);
 			
 			ArrayList<String> set2List = new ArrayList<String>(); 
 			set2List.addAll(set2);
-			System.out.println(set2List);
 			
+			String filename="src/DataSheet/GherkinStepsRepo.xlsx";
 			int IterCnt =0;		
+			
+			 XSSFWorkbook workbook = new XSSFWorkbook(new FileInputStream(new File(filename))); 
+			 XSSFSheet sheet = workbook.getSheetAt(0); 
+			 FileOutputStream fileOut = new FileOutputStream(filename); 
 				 				 
-			if ((Map1KeySize==set1size) &&(set1size==set2size)){				
+			if ((Map1KeySize==set1Size) &&(set1size==set2size)){				
 				while (Map1KeySize>0) {	
+					Row row = sheet.createRow(rownum++);
+				    Cell cell = row.createCell(cellnum);
 					if (set2List.get(IterCnt).startsWith("Then")) {
 						step+=set1List.get(IterCnt)+ " should be " + map1.get(Map1KeySet.get(IterCnt))+"\n";
-						System.out.println(step);
+						step2=set1List.get(IterCnt)+ " should be " + map1.get(Map1KeySet.get(IterCnt))+"\n";	
+						cell.setCellValue(step2);	
+
+//						System.out.println(step);
 					}else {
 						step+=(set1List.get(IterCnt)+ " is " + map1.get(Map1KeySet.get(IterCnt)))+"\n";
-						System.out.println(step);
+						step2=(set1List.get(IterCnt)+ " is " + map1.get(Map1KeySet.get(IterCnt)))+"\n";	
+						cell.setCellValue(step2);	
+
+//						System.out.println(step);
 					}						  
 					  IterCnt++;
 					  Map1KeySize--;
 				}					
-					}		
+					}
+			workbook.write(fileOut);
+			fileOut.close();			
 			}					
 				return step;		
 	}

@@ -6,12 +6,12 @@ Given Login is Valid User Name and Password
 And AccountStatus is Active
 And PortfolioCreated is Yes
 And SufficientFunds is Yes
-And Navigation is T24 Home Screen >  Navigate to > Private Operation > Securities > Front office > Direct ordering > Single orders > Order entry >Buy Order
+And Navigation is T24 Home Screen >  Navigate to > Private Operation > Securities > Front office > Direct ordering > Single orders > Order entry >Sell Order
 When TradeActivity is New
 And TradeDate is Current
-And Session is Pre Session
-And Order is Buy
-And Currency is LCY
+And Session is Continuous
+And Order is Sell
+And Currency is FCY
 And TypeofOrder is Market
 And LimitType is Good till day
 And Commitandvalidate is Yes
@@ -22,4 +22,4 @@ And Accountingentries should be Checked
 
 Examples:
 |TestConditionID|
-|TC_01|
+|TC_05|
