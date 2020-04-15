@@ -2,7 +2,7 @@
 Feature: Buy a Share
 @Share
 Scenario Outline: To Buy a Share
-Given Login is Valid User Name and Password 
+Given Login is Valid User Name and Password
 And AccountStatus is Active
 And PortfolioCreated is Yes
 And SufficientFunds is Yes

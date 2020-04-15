@@ -16,6 +16,7 @@ import com.codoid.products.fillo.Fillo;
 import com.codoid.products.fillo.Recordset;
 
 public class Section3_Step1_AssignKeyword {
+	
 	public static String inputfile="src/DataSheet/ScenarioMatrix.xlsx";
     public static String outputfile="src/DataSheet/ScenarioMatrixwithKeyword.xlsx";
 	
@@ -33,6 +34,7 @@ public class Section3_Step1_AssignKeyword {
 		    	}
 	
 	public static void replaceWithSteps() throws FilloException {
+		
 		LinkedHashMap<String, String> map1 = new LinkedHashMap<String, String>();
 		String header="",value="",strQuery2="",strQuery1="",Query="",steps="",keyword="";
 				
@@ -85,6 +87,7 @@ public class Section3_Step1_AssignKeyword {
 		}	
 	
 	public static void assignKeyword() throws FilloException {
+		
 		String header="",value="",uniqueSteps="",keywords="";
 		String file="src/DataSheet/UniqueGherkinStepsRepo.xlsx";
 		
@@ -136,21 +139,13 @@ public class Section3_Step1_AssignKeyword {
 				break;
 				}else {
 					break;
-				}		
-			
+				}			
 				}
-				}
-				
+				}				
 			}
 		}
 	}
 	}
 		System.out.println("*****Scenario Matrix with Keyword is generated****");
 	}
-	public static void main(String[] args) throws IOException, FilloException{
-		
-         fileCopy();
-	     replaceWithSteps();
-         assignKeyword();
-         }
-}
+	}

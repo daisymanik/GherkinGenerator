@@ -2,7 +2,7 @@
 Feature: Buy a Bond
 @Bond
 Scenario Outline: To Buy a Bond
-Given Login is Valid User Name and Password 
+Given Login is Valid User Name and Password
 And AccountStatus is Active
 And PortfolioCreated is Yes
 And SufficientFunds is Yes

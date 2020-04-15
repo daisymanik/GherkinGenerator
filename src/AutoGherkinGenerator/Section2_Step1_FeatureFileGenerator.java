@@ -15,7 +15,8 @@ import com.codoid.products.fillo.Recordset;
 
 public class Section2_Step1_FeatureFileGenerator {
 	
-	public static void main(String[] args) throws FilloException, IOException {
+	public static void featureFileCreation() throws FilloException, IOException {
+		
 		Fillo fillo = new Fillo();
 		Connection connection = fillo.getConnection(
 				"src/DataSheet/ScenarioMatrix.xlsx");		
@@ -34,7 +35,7 @@ public class Section2_Step1_FeatureFileGenerator {
 		String FeatureData=recordset.getField("Feature_Data");
 		
 		String fileName = 
-				"src/Features/scenario"+MainIter+".feature";    
+				"src/Features/Scenario"+MainIter+".feature";    
 		BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));  
 		writer.write(FeatureTag);
 		writer.write("\n");

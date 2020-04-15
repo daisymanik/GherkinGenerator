@@ -17,16 +17,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Section2_Step2_UniqueGherkinSteps {
 
-
-	public static void main(String[] args) throws FileNotFoundException, IOException {		
-		
-		removeDuplicates();
-		assignKeyword();
-		assignHeader();
-		
-	}
-
 	public static void removeDuplicates() throws FileNotFoundException, IOException {
+		
 			Set<String> set=new LinkedHashSet<String>();
 			String srcfile="src/DataSheet/GherkinStepsRepo.xlsx";
 			String descfile="src/DataSheet/UniqueGherkinStepsRepo.xlsx";
@@ -57,6 +49,7 @@ public class Section2_Step2_UniqueGherkinSteps {
 	}
 	
 	public static void assignKeyword() throws IOException {
+		
     String file="src/DataSheet/UniqueGherkinStepsRepo.xlsx";
 		
 		Workbook workbook = new XSSFWorkbook(new FileInputStream(new File(file))); 
